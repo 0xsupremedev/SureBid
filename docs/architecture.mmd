@@ -11,7 +11,7 @@ flowchart LR
   subgraph FE[Next.js Frontend]
     direction TB
     FE_APP["_app.tsx\nUI Components"]:::fe
-    FE_HOOKS["hooks/useGateway.ts\n hooks/useAuctions.ts\n hooks/useWalletSigner.ts"]:::fe
+    FE_HOOKS["hooks/useGateway.ts\nhooks/useAuctions.ts\nhooks/useWalletSigner.ts"]:::fe
     FE_GW["lib/gateway.ts\nJSON-RPC Client"]:::fe
     FE_STATE["store/txFeed.ts\nZustand Store"]:::fe
     FE_ADMIN["components/AdminRoutingSlider.tsx\ncomponents/MetricsPanel.tsx"]:::fe
@@ -40,11 +40,11 @@ flowchart LR
 
   %% Flows
   U -->|Interact| FE_APP
-  A -->|Configure Routing<br/>(balanced -> jito-heavy)| FE_ADMIN
+  A -->|Configure Routing\n(balanced -> jito-heavy)| FE_ADMIN
   LT -->|Generate Load| FE_APP
 
   FE_APP --> FE_HOOKS --> FE_GW
-  FE_GW -->|buildGatewayTransaction<br/>sendTransaction| SANCTUM
+  FE_GW -->|buildGatewayTransaction\nsendTransaction| SANCTUM
   FE_GW -->|direct send (RPC-only mode)| RPC
   SANCTUM -->|deliver via| JITO
   SANCTUM -->|fallback / delivery| RPC
@@ -60,7 +60,7 @@ flowchart LR
   FE_APP -->|render| OBS
 
   %% Admin affects routing parameters consumed by FE_GW
-  FE_ADMIN -->|cuPriceRange, jitoTipRange,<br/>routing split| FE_GW
+  FE_ADMIN -->|cuPriceRange, jitoTipRange,\nrouting split| FE_GW
 
   classDef actor fill:#FDF6E3,stroke:#B58900,color:#333
   classDef fe fill:#E6F7FF,stroke:#1890FF,color:#003A8C
@@ -69,5 +69,3 @@ flowchart LR
   classDef db fill:#FFF1F0,stroke:#F5222D,color:#5C0011
   classDef wallet fill:#F9F0FF,stroke:#722ED1,color:#22075E
   classDef obs fill:#FFFBE6,stroke:#FADB14,color:#613400
-
-
