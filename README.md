@@ -106,38 +106,38 @@ flowchart LR
   %% Clients
   U[User]:::actor
   A[Admin]:::actor
-  LT[Load Tester\nscripts/load-test.ts]:::tool
+  LT["Load Tester\nscripts/load-test.ts"]:::tool
 
   %% Frontend
   subgraph FE[Next.js Frontend]
     direction TB
-    FE_APP[_app.tsx\nUI Components]:::fe
-    FE_HOOKS[hooks/useGateway.ts\n hooks/useAuctions.ts\n hooks/useWalletSigner.ts]:::fe
-    FE_GW[lib/gateway.ts\nJSON-RPC Client]:::fe
-    FE_STATE[store/txFeed.ts\nZustand Store]:::fe
-    FE_ADMIN[components/AdminRoutingSlider.tsx\ncomponents/MetricsPanel.tsx]:::fe
+    FE_APP["_app.tsx\nUI Components"]:::fe
+    FE_HOOKS["hooks/useGateway.ts\n hooks/useAuctions.ts\n hooks/useWalletSigner.ts"]:::fe
+    FE_GW["lib/gateway.ts\nJSON-RPC Client"]:::fe
+    FE_STATE["store/txFeed.ts\nZustand Store"]:::fe
+    FE_ADMIN["components/AdminRoutingSlider.tsx\ncomponents/MetricsPanel.tsx"]:::fe
   end
 
   %% Backend
   subgraph BE[Backend API]
     direction TB
-    BE_API[backend/src/index.js\nREST/WebSocket]:::be
+    BE_API["backend/src/index.js\nREST/WebSocket"]:::be
     DB[(Database/TSDB)]:::db
   end
 
   %% Routing Providers
   subgraph ROUTE[Routing & Providers]
     direction LR
-    SANCTUM[Sanctum Gateway\nJSON-RPC Endpoint]:::svc
-    JITO[Jito Block Engine\nTips/Bundle]:::svc
+    SANCTUM["Sanctum Gateway\nJSON-RPC Endpoint"]:::svc
+    JITO["Jito Block Engine\nTips/Bundle"]:::svc
     RPC[Solana RPC Cluster]:::svc
   end
 
   %% Wallet/Signer
-  WALLET[User Wallet\n(Phantom/Solana)]:::wallet
+  WALLET["User Wallet\n(Phantom/Solana)"]:::wallet
 
   %% Metrics/Observability
-  OBS[LiveTxFeed / Charts\n(KPIs, Confirmations, Failures, Refunds)]:::obs
+  OBS["LiveTxFeed / Charts\n(KPIs, Confirmations, Failures, Refunds)"]:::obs
 
   %% Flows
   U -->|Interact| FE_APP
