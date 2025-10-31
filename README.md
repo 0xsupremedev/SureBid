@@ -94,6 +94,13 @@ Contributing
 
 Issues and PRs are welcome. Please open an issue first for significant changes.
 
+Architecture
+------------
+
+See the detailed Mermaid diagram at `docs/architecture.mmd`.
+
+GitHub renders Mermaid directly; you can also preview in Markdown by embedding the file contents in a ```mermaid block.
+
 License
 -------
 
