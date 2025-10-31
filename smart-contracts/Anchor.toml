@@ -1,0 +1,13 @@
+[programs.localnet]
+surebid_auction = "SureBid1111111111111111111111111111111111111"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "Localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "node tests/surebid.js"
+

@@ -1,0 +1,12 @@
+[package]
+name = "surebid-auction"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "surebid_auction"
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+anchor-lang = "0.29.0"
+

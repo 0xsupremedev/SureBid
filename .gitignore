@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+frontend/.next/
+out/
+
+# Builds
+dist/
+build/
+
+# Env
+.env*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS/Editor
+.DS_Store
+.idea/
+.vscode/
+
+# Coverage/Cache
+coverage/
+.turbo/
+.parcel-cache/
+
+# Misc
+*.swp
+*.zip
+*.tar
+
