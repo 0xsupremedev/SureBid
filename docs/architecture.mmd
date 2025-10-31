@@ -25,10 +25,10 @@ flowchart LR
   end
 
   %% Routing Providers
-  subgraph ROUTE[Routing & Providers]
+  subgraph ROUTE[Routing and Providers]
     direction LR
     SANCTUM["Sanctum Gateway\nJSON-RPC Endpoint"]:::svc
-    JITO["Jito Block Engine\nTips/Bundle"]:::svc
+    JITO["Jito Block Engine\nTips Bundle"]:::svc
     RPC[Solana RPC Cluster]:::svc
   end
 
@@ -36,18 +36,18 @@ flowchart LR
   WALLET["User Wallet\n(Phantom/Solana)"]:::wallet
 
   %% Metrics/Observability
-  OBS["LiveTxFeed / Charts\n(KPIs, Confirmations, Failures, Refunds)"]:::obs
+  OBS["LiveTxFeed / Charts\nKPIs Confirmations Failures Refunds"]:::obs
 
   %% Flows
   U -->|Interact| FE_APP
-  A -->|Configure Routing\n(balanced → jito-heavy)| FE_ADMIN
-  LT -->|Generate Load| FE_APP
+  A -->|Configure routing: balanced to jito heavy| FE_ADMIN
+  LT -->|Generate load| FE_APP
 
   FE_APP --> FE_HOOKS --> FE_GW
-  FE_GW -->|buildGatewayTransaction\nsendTransaction| SANCTUM
-  FE_GW -->|direct send (RPC-only mode)| RPC
+  FE_GW -->|buildGatewayTransaction and sendTransaction| SANCTUM
+  FE_GW -->|direct send (RPC only mode)| RPC
   SANCTUM -->|deliver via| JITO
-  SANCTUM -->|fallback / delivery| RPC
+  SANCTUM -->|fallback or delivery| RPC
 
   FE_APP -->|sign| WALLET
   WALLET -->|signed tx| FE_GW
@@ -60,7 +60,7 @@ flowchart LR
   FE_APP -->|render| OBS
 
   %% Admin affects routing parameters consumed by FE_GW
-  FE_ADMIN -->|cuPriceRange, jitoTipRange,\nrouting split| FE_GW
+  FE_ADMIN -->|cuPriceRange, jitoTipRange, routing split| FE_GW
 
   classDef actor fill:#FDF6E3,stroke:#B58900,color:#333
   classDef fe fill:#E6F7FF,stroke:#1890FF,color:#003A8C
