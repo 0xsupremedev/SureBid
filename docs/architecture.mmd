@@ -5,62 +5,62 @@ flowchart LR
   %% Clients
   U[User]:::actor
   A[Admin]:::actor
-  LT["Load Tester\nscripts/load-test.ts"]:::tool
+  LT["Load Tester\nscripts load-test.ts"]:::tool
 
   %% Frontend
   subgraph FE[Next.js Frontend]
     direction TB
     FE_APP["_app.tsx\nUI Components"]:::fe
-    FE_HOOKS["hooks/useGateway.ts\nhooks/useAuctions.ts\nhooks/useWalletSigner.ts"]:::fe
-    FE_GW["lib/gateway.ts\nJSON-RPC Client"]:::fe
-    FE_STATE["store/txFeed.ts\nZustand Store"]:::fe
-    FE_ADMIN["components/AdminRoutingSlider.tsx\ncomponents/MetricsPanel.tsx"]:::fe
+    FE_HOOKS["hooks useGateway.ts\nhooks useAuctions.ts\nhooks useWalletSigner.ts"]:::fe
+    FE_GW["lib gateway.ts\nJSON RPC Client"]:::fe
+    FE_STATE["store txFeed.ts\nZustand Store"]:::fe
+    FE_ADMIN["components AdminRoutingSlider.tsx\ncomponents MetricsPanel.tsx"]:::fe
   end
 
   %% Backend
   subgraph BE[Backend API]
     direction TB
-    BE_API["backend/src/index.js\nREST/WebSocket"]:::be
-    DB[(Database/TSDB)]:::db
+    BE_API["backend src index.js\nREST WebSocket"]:::be
+    DB[(Database TSDB)]:::db
   end
 
   %% Routing Providers
   subgraph ROUTE[Routing and Providers]
     direction LR
-    SANCTUM["Sanctum Gateway\nJSON-RPC Endpoint"]:::svc
+    SANCTUM["Sanctum Gateway\nJSON RPC Endpoint"]:::svc
     JITO["Jito Block Engine\nTips Bundle"]:::svc
     RPC[Solana RPC Cluster]:::svc
   end
 
   %% Wallet/Signer
-  WALLET["User Wallet\n(Phantom/Solana)"]:::wallet
+  WALLET["User Wallet\nPhantom Solana"]:::wallet
 
   %% Metrics/Observability
-  OBS["LiveTxFeed / Charts\nKPIs Confirmations Failures Refunds"]:::obs
+  OBS["LiveTxFeed Charts\nKPIs Confirmations Failures Refunds"]:::obs
 
   %% Flows
   U -->|Interact| FE_APP
-  A -->|Configure routing: balanced to jito heavy| FE_ADMIN
+  A -->|Configure routing balanced to jito heavy| FE_ADMIN
   LT -->|Generate load| FE_APP
 
   FE_APP --> FE_HOOKS --> FE_GW
-  FE_GW -->|buildGatewayTransaction and sendTransaction| SANCTUM
-  FE_GW -->|direct send (RPC only mode)| RPC
-  SANCTUM -->|deliver via| JITO
-  SANCTUM -->|fallback or delivery| RPC
+  FE_GW -->|build gateway transaction and send transaction| SANCTUM
+  FE_GW -->|direct send RPC only| RPC
+  SANCTUM -->|deliver via jito| JITO
+  SANCTUM -->|fallback delivery RPC| RPC
 
   FE_APP -->|sign| WALLET
   WALLET -->|signed tx| FE_GW
 
   %% Backend metrics and feed
-  FE_APP <-->|WS/HTTP| BE_API
+  FE_APP <-->|WS HTTP| BE_API
   BE_API --> DB
   DB --> BE_API
   BE_API -->|aggregated metrics| OBS
   FE_APP -->|render| OBS
 
   %% Admin affects routing parameters consumed by FE_GW
-  FE_ADMIN -->|cuPriceRange, jitoTipRange, routing split| FE_GW
+  FE_ADMIN -->|cuPriceRange jitoTipRange routing split| FE_GW
 
   classDef actor fill:#FDF6E3,stroke:#B58900,color:#333
   classDef fe fill:#E6F7FF,stroke:#1890FF,color:#003A8C
