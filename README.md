@@ -141,11 +141,11 @@ flowchart LR
 
   %% Flows
   U -->|Interact| FE_APP
-  A -->|Configure Routing\n(balanced -> jito-heavy)| FE_ADMIN
+  A -->|Configure Routing<br/>(balanced -> jito-heavy)| FE_ADMIN
   LT -->|Generate Load| FE_APP
 
   FE_APP --> FE_HOOKS --> FE_GW
-  FE_GW -->|buildGatewayTransaction\nsendTransaction| SANCTUM
+  FE_GW -->|buildGatewayTransaction<br/>sendTransaction| SANCTUM
   FE_GW -->|direct send (RPC-only mode)| RPC
   SANCTUM -->|deliver via| JITO
   SANCTUM -->|fallback / delivery| RPC
@@ -161,7 +161,7 @@ flowchart LR
   FE_APP -->|render| OBS
 
   %% Admin affects routing parameters consumed by FE_GW
-  FE_ADMIN -->|cuPriceRange, jitoTipRange,\nrouting split| FE_GW
+  FE_ADMIN -->|cuPriceRange, jitoTipRange,<br/>routing split| FE_GW
 
   classDef actor fill:#FDF6E3,stroke:#B58900,color:#333
   classDef fe fill:#E6F7FF,stroke:#1890FF,color:#003A8C
